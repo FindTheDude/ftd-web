@@ -5,8 +5,8 @@ Find the Dude! hack
 
 Contributors:
 =============
-Angel Villalain
-Omar Cruz
-Osvalado Ferrero
-Jose Villalón
-Andres Colón
+1. Angel Villalain
+2. Omar Cruz
+3. Osvalado Ferrero
+4. Jose Villalón
+5. Andres Colón
