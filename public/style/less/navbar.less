@@ -1,0 +1,59 @@
+.navbar-brand {
+  font-family: 'Vampiro One', cursive;
+  .rotate(354deg);
+}
+
+.navbar-default {
+  .navbar-nav {
+    > li > a {
+      font-size: 16px;
+      font-family: 'Cabin Condensed', sans-serif;
+    }
+  }
+}
+
+.navbar-translucent {
+  @navbar-default-link-color: white;
+  @navbar-translucent-background-color: rgba(255, 255, 255, 0);
+  .navbar-default();
+  .navbar-brand {
+    color: white;
+    &:hover,
+    &:focus {
+      color: white;
+    }
+  }
+  background-color: @navbar-translucent-background-color;
+  border: none;
+  .navbar-nav {
+    > li > a {
+      color: @navbar-default-link-color;
+
+      &:hover,
+      &:focus {
+        color: @navbar-default-link-color;
+        font-weight: bold;
+      }
+    }
+    > .active, li {
+      border-bottom: 4px solid #fff;
+      margin-right: 8px;
+      > a {
+        &,
+        &:hover,
+        &:focus {
+          color: @navbar-default-link-color;
+          font-weight: bold;
+          background: @navbar-translucent-background-color;
+        }
+      }
+    }
+    > .disabled > a {
+      &,
+      &:hover,
+      &:focus {
+        color: @navbar-default-link-disabled-color;
+      }
+    }
+  }
+}

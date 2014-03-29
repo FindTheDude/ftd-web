@@ -2,11 +2,11 @@
     'use strict';
 
     angular.module('find-the-dude')
-        .directive('header', function() {
+        .directive('nav', function() {
             return {
-                restrict: 'C',
+                restrict: 'E',
                 replace: false,
-                templateUrl: 'scripts/header/views/header.html',
+                templateUrl: 'scripts/header/views/nav.html',
                 link: function(scope) {
                     scope.dude = 'dude';
                 }

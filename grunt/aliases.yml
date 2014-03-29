@@ -24,7 +24,6 @@ server:
   - 'jshint'
   - 'less:build'
   - 'ngtemplates:build'
-  - 'testem'
   - 'express:dev'
   - 'open'
   - 'watch'
