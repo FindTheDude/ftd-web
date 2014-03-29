@@ -38,6 +38,8 @@
     "morgan": "~1.0.0",
     "nconf": "~0.6.9",
     "passport-local": "~1.0.0",
-    "restler": "~3.2.0"
+    "restler": "~3.2.0",
+    "fbgraph": "~0.2.10",
+    "async": "~0.4.0"
   }
 }
