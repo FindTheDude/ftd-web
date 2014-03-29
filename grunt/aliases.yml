@@ -1,0 +1,34 @@
+test:
+  - 'ngtemplates:build'
+  - 'testem:run'
+
+build:
+  - 'jshint'
+  - 'clean:build'
+  - 'clean:dist'
+  - 'less:build'
+  - 'useminPrepare'
+  - 'htmlmin:dist'
+  - 'ngtemplates:build'
+  - 'concat'
+  - 'ngmin:build'
+  - 'uglify'
+  - 'cssmin'
+  - 'rev:build'
+  - 'usemin'
+  - 'copy:dist'
+
+server:
+  - 'clean:build'
+  - 'clean:dist'
+  - 'jshint'
+  - 'less:build'
+  - 'ngtemplates:build'
+  - 'testem'
+  - 'express:dev'
+  - 'open'
+  - 'watch'
+
+default:
+  - 'test'
+  - 'build'

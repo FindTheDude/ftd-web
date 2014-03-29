@@ -1,0 +1,52 @@
+{
+    "build": {
+        "dir": "build"
+    },
+    "dist": {
+        "dir": "dist"
+    },
+    "public": {
+        "dir": "public",
+        "less": {
+            "src": "public/style/less/**/*.less",
+            "dir": "public/style/less"
+        },
+        "js": {
+            "src": [
+                "public/scripts/app.js",
+                "public/scripts/**/*.js"
+            ],
+            "templates": "scripts/**/*.html",
+            "vendor": [
+                "public/scripts/vendor/angular/angular.js",
+                "public/scripts/vendor/angular-animate/angular-animate.js",
+                "public/scripts/vendor/angular-cookies/angular-cookies.js",
+                "public/scripts/vendor/angular-mocks/angular-mocks.js",
+                "public/scripts/vendor/angular-resource/angular-resource.js",
+                "public/scripts/vendor/angular-route/angular-route.js",
+                "public/scripts/vendor/angular-bootstrap/ui-bootstrap-tpls.js"
+            ],
+            "specs": [
+                "specs/public/**/*.js"
+            ]
+        }
+    },
+    "server": {
+        "dir": "server",
+        "js": {
+            "src": [
+                "server/server.js",
+                "server/**/*.js"
+            ],
+            "specs": [
+                "specs/server/**/*.js"
+            ]
+        }
+    },
+    "specs": {
+        "vendor": [
+            "public/scripts/vendor/jasmine-given/dist/jasmine-given.js",
+            "public/scripts/vendor/jasmine-stealth/dist/jasmine-stealth.js"
+        ]
+    }
+}
