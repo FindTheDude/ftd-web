@@ -16,7 +16,7 @@
 
             return {
                 isLoggedIn: function() {
-                    return $rootScope.user !== undefined;
+                    return ipCookie('user')!== undefined && $rootScope.user !== undefined;
                 },
                 login: function() {
                     $facebook.login().then(login);
