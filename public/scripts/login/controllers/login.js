@@ -10,7 +10,8 @@
         .config(function($routeProvider) {
             $routeProvider.when('/login', {
                 controller: 'LoginController',
-                templateUrl: 'scripts/login/views/login.html'
+                templateUrl: 'scripts/login/views/login.html',
+                restricted: false
             });
         });
 })();

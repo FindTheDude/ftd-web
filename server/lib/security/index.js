@@ -1,4 +1,4 @@
-(function() {
+(function () {
     'use strict';
 
     var passport = require('passport');
@@ -10,58 +10,59 @@
     passport.use(new LocalStrategy({
         usernameField: 'userId',
         passwordField: 'accessToken'
-    }, function(userId, accessToken, done) {
-        if(!userId && !accessToken) {
+    }, function (userId, accessToken, done) {
+        if (!userId && !accessToken) {
             done(null, false, {message: 'Invalid userId or token'});
         }
 
         console.log('access_token ' + accessToken);
 
-        facebook.retrieveLongLiveToken(accessToken, function(data) {
-            var regexp = /^access_token=([^&]+)&expires=([^&]).*$/;
+        facebook.retrieveLongLiveToken(accessToken, function (data) {
+            var regexp = /^access_token=([^&]+)&expires=([^&]+).*$/;
             var match = regexp.exec(data);
             var token = match[1];
             var expire = match[2];
-            facebook.me(token, function(response) {
-                console.log(response);
-                console.log('Here we would find the user... by '+ response.id);
-                User.findOne({ facebookId : response.id},
-                          function(error, user) {
-                                if (error) {
+            facebook.me(token, function (response) {
+                User.findOne({ facebookId: response.id},
+                    function (error, user) {
+                        if (error) {
+                            done(null, false, {message: 'Cannot authenticate user'});
+                        }
+                        if (!user) {
+                            var expiration = new Date();
+                            expiration.setMinutes(expiration.getMinutes() + expire/60);
+                            user = new User({fullName: response.name, facebookId: response.id, accessToken: token, expires: expiration});
+                            user.save(function (err) {
+                                if (err) {
                                     done(null, false, {message: 'Cannot persist user'});
                                 }
-                                if (!user) {
-                                        user = new User({fullName: response.name, facebookId: response.id, accessToken: token, expires: expire});
-                                        user.save(function(err) {
-                                            if(err) {
-                                                done(null, false, {message: 'Cannot persist user'});
-                                            }
-                                        });
-                                        done(null, user);
-                                        console.log('We would create the user');
-                                }
-                                else {
-                                    console.log('We have found the user!');
-                                    done(null, user);
-                                }
-                        });
+                            });
+                            done(null, user);
+                        } else {
+                            user.accessToken = token;
+                            user.expires = new Date();
+                            user.expires.setMinutes(user.expires.getMinutes() + expire/60);
+                            user.save();
+                            done(null, user);
+                        }
+                    });
             });
         });
     }));
 
-    passport.serializeUser(function(user, done) {
+    passport.serializeUser(function (user, done) {
         done(null, user.facebookId);
     });
 
-    passport.deserializeUser(function(id, done) {
+    passport.deserializeUser(function (id, done) {
         done(null, User.findOne({facebookId: id}));
     });
 
-    module.exports = function(app) {
+    module.exports = function (app) {
         app.use(passport.initialize());
         app.use(passport.session());
 
-        app.post('/api/auth/facebook', passport.authenticate('local'), function(req, res) {
+        app.post('/api/auth/facebook', passport.authenticate('local'), function (req, res) {
             res.send(req.user);
         });
     };

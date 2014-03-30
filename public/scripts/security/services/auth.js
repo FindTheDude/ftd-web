@@ -13,10 +13,11 @@
             };
 
             var finish = function(response) {
+                console.log(response);
                 ipCookie('user', response.data,
-                    {expires: response.authResponse.expiresIn/60, expirationUnit: 'minutes'});
-                $location.path('/dudes');
+                    {expires: response.data.expires.getMinutes() - new Date().getMinutes(), expirationUnit: 'minutes'});
                 $rootScope.user = ipCookie('user');
+                $location.path('/dudes');
             };
 
             return {
