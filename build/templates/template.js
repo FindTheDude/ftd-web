@@ -17,12 +17,32 @@ angular.module('youlearn').run(['$templateCache', function($templateCache) {
     "</div>\n" +
     "\n" +
     "<div data-upload></div>\n" +
-    "\n"
+    "\n" +
+    "<div data-dudes class=\"containter dudes\"></div>\n"
   );
 
 
   $templateCache.put('scripts/dudes/views/search.html',
-    ""
+    "<div class=\"row dude\">\n" +
+    "    <div class=\"col-sm-2\">\n" +
+    "        <canvas id=\"myCanvas\" width=\"578\" height=\"400\"></canvas>\n" +
+    "    </div>\n" +
+    "    <div class=\"col-sm-8\">\n" +
+    "        <h2>{{user.fullName}}</h2>\n" +
+    "        <button class=\"btn btn-lg btn-primary\" data-ng-click=\"refresh()\">\n" +
+    "            <i class=\"fa fa-refresh\"></i> Refresh Contacts\n" +
+    "        </button>\n" +
+    "    </div>\n" +
+    "</div>\n" +
+    "</div>\n" +
+    "<script>\n" +
+    "    var drawCanvas = function (htmlId, tagsInformation) {\n" +
+    "        var canvas = document.getElementById(htmlId);\n" +
+    "        var context = canvas.getContext('2d');\n" +
+    "        context.drawImage(photo, 0, 0, 200, 150);\n" +
+    "        context.resize\n" +
+    "    }\n" +
+    "</script>"
   );
 
 
