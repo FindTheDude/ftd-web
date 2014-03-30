@@ -30,11 +30,18 @@
     app.use(require('connect-livereload')({
         port: configuration.get('livereload:port')
     }));
+    app.use(express.bodyParser({uploadDir: config.get('upload:dir')}));
 
     app.use(express.static(path.join(__dirname, '../build')));
     app.use(express.static(path.join(__dirname, '../public')));
     app.use(express.errorHandler());
     app.use(logging);
+
+    app.use(express.static(path.join(__dirname, '../build')));
+    app.use(express.static(path.join(__dirname, '../public')));
+    app.use(express.errorHandler());
+    app.use(logging);
+    require('../lib/routes')(app);
 
     app.listen(configuration.get('express:port'), function() {
         console.log('Express server listening on port ' + configuration.get('express:port'));

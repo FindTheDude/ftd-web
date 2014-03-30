@@ -9,5 +9,3 @@ var userSchema = new Schema({
 
 
 var User = mongoose.model('User', userSchema);
-
-var user = new User({ fullname: "Andres", facebookId: "thisismyfacebookid", accessToken: "what_a_token!"})
