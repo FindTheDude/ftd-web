@@ -69,8 +69,6 @@ exports.recognize = function (request, response) {
 
     var userId = request.user.facebookId;
 
-    // connect to mongo db to fetchh user information
-
     var filePath = request.files.photo.path;
 
     console.log('Ready to predict.');
@@ -85,7 +83,6 @@ exports.recognize = function (request, response) {
                 if (!isReady) {
                     err = 'Not Ready';
                 }
-
                 callback(err);
             });
         },
