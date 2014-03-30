@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>Find the Dude!</title>
+    <title>YouLearn</title>
     <!-- build:css(public) style/vendor.css -->
     <link href="vendor/bootstrap/dist/css/bootstrap.css" rel="stylesheet">
     <link href="vendor/Font-Awesome/css/font-awesome.css" rel="stylesheet">
@@ -15,7 +15,13 @@
 
 <body data-ng-app="find-the-dude">
 <nav class="navbar navbar-translucent navbar-static-top" data-access></nav>
-<div class="container" data-ng-view></div>
+
+<div class="container" data-ng-view>    
+    <div class="well drop_into_well">
+      Drop an image to find the dude or click here to upload an image to find!
+    </div>
+</div>
+
 <!-- build:js(public) scripts/vendor.js -->
 <script src="vendor/angular/angular.js"></script>
 <script src="vendor/angular-animate/angular-animate.js"></script>
@@ -28,11 +34,11 @@
 
 <!-- build:js(public) scripts/app.js -->
 <script src="scripts/app.js"></script>
-<script src="scripts/security/services/auth.js"></script>
-<script src="scripts/security/directives/access.js"></script>
-<script src="scripts/dudes/controllers/dude.js"></script>
-<script src="scripts/login/controllers/login.js"></script>
-<script src="scripts/header/directives/nav.js"></script>
+<!-- <script src="scripts/security/services/auth.js"></script> -->
+<!-- <script src="scripts/security/directives/access.js"></script> -->
+<!-- <script src="scripts/dudes/controllers/dude.js"></script> -->
+<!-- <script src="scripts/login/controllers/login.js"></script> -->
+<!-- <script src="scripts/header/directives/nav.js"></script> -->
 <!-- endbuild -->
 </body>
 </html>
