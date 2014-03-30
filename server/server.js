@@ -6,6 +6,26 @@
 
     var app = express();
 
+    // DB Connection
+    var mongoose = require('mongoose');
+    mongoose.connect('mongodb://localhost/ftdapp');
+    // var db = mongoose.createConnection('localhost', 'FTDApp');
+    // db.on('error', console.error.bind(console, 'connection error:'));
+    // db.once('open', function callback () {
+    //     // yay!
+    // });
+
+    var schema = require('models/schema.js');
+
+    app.get('/user/get', function(req, res){
+      var user = new User({ fullname: 'Andres', facebookId: 'thisismyfacebookid', accessToken: 'what_a_token!'});
+      res.send('Here is the user: '+ user);
+    });
+
+    app.get('/user/add', function(req, res){
+      res.send('Creating the User');
+    });
+
     console.log(__dirname);
     //this is needed only on dev environment
     //also avoid hard coding the value
