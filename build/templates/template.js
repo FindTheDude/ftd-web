@@ -9,7 +9,7 @@ angular.module('youlearn').run(['$templateCache', function($templateCache) {
     "        </div>\n" +
     "        <div class=\"col-sm-8\">\n" +
     "            <h1>{{user.fullName}}</h1>\n" +
-    "            <a href=\"/users/:userId/friends\"class=\"btn btn-lg btn-primary\">\n" +
+    "            <button class=\"btn btn-lg btn-primary\" data-ng-click=\"refresh()\">\n" +
     "                <i class=\"fa fa-refresh\"></i> Refresh Contacts\n" +
     "            </button>\n" +
     "        </div>\n" +

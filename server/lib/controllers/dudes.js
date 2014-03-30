@@ -2,44 +2,80 @@
 
 var async = require('async'),
     fs = require('fs'),
-    ftd = require('../../../lib/findthedude.js');
-
-/**
- * Get a specific dude
- */
-exports.getDude = function (request, response) {
-    //var userId = request.params.userId;
-    //var dudeId = request.params.dudeId;
-
-    console.log('Ready to get dude.');
-
-    // connect to mongo db to fecth dude list and generate the links
-    response.send(500);
-};
+    ftd = require('../../../lib/findthedude.js'),
+    mongoose = require('mongoose'),
+    Tags = mongoose.model('Tags');
 
 /**
  * Get recognized dude list
  */
 exports.list = function (request, response) {
-    //var userId = request.params.userId;
+    async.waterfall([
+        function (callback) {
+            console.log('Finding all.');
 
-    console.log('Ready to get dude list.');
+            Tags.findAll({ facebookId: request.user.facebookId}, function (err, tags) {
+                callback(err, tags);
+            });
+        },
+        function (tags) {
+            console.log('Returning tags on response.');
 
-    // connect to mongo db to fecth dude list and generate the links
-    response.send(500);
+            return response.json(tags);
+        }
+    ], function (err) {
+        var errors = [];
+        errors.push({
+            statusCode: 404,
+            error: err
+        });
+        response.send(404, err);
+    });
 };
 
 /**
  * Recognize dude
  */
 exports.recognize = function (request, response) {
-    var userId = request.params.userId;
+    var debug = true;
 
-    // connect to mongo db to fecth user information
+    if (debug) {
+        var tagsArray = [];
 
-    var filePath = request.files.file.path;
+        tagsArray.push({
+            id: 'dudeId',
+            name: 'The Motherfucker',
+            confidence: '99.9%',
+            x: 10,
+            y: 50,
+            w: 100,
+            h: 100
+        });
+
+        tagsArray.push({
+            id: 'dudeFriendId',
+            name: 'The Dudes Friend',
+            confidence: '99.9%',
+            x: 20,
+            y: 10,
+            w: 100,
+            h: 100
+        });
+
+        var dudeInformation = {tags: tagsArray };
+
+        return response.json(dudeInformation);
+    }
+
+    var userId = request.user.facebookId;
+
+    // connect to mongo db to fetchh user information
+
+    var filePath = request.files.photo.path;
 
     console.log('Ready to predict.');
+
+    var photo;
 
     async.waterfall([
         function (callback) {
@@ -68,6 +104,7 @@ exports.recognize = function (request, response) {
                 callback(err);
             } else {
                 fs.open(filePath, 'r', function (err, fileDescriptor) {
+                    photo = fileDescriptor;
                     callback(err, fileDescriptor);
                 });
             }
@@ -78,12 +115,19 @@ exports.recognize = function (request, response) {
                 callback(err, predictions);
             });
         },
-        function (predictions) {
+        function (tagArray) {
             console.log('Predicted.');
 
-            response.json(predictions);
+            var tagsEntity = new Tags({
+                facebookId: request.user.facebookId,
+                photo: photo,
+                tags: tagArray
+            });
+
+            tagsEntity.save();
 
             // Todo store to mongo db to allow refetching of dudes
+            return response.json({tags: tagArray});
         }
     ], function (err) {
         var errors = [];

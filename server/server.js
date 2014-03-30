@@ -27,7 +27,7 @@
     app.configure(function() {
         app.use(express.static(path.join(__dirname, '../build')));
         app.use(express.static(path.join(__dirname, '../public')));
-        app.use(express.bodyParser({uploadDir: configuration.get('upload:dir')}));
+        app.use(express.bodyParser({uploadDir: configuration.get('upload:dir'), limit: '50mb'}));
         app.use(express.cookieParser());
         app.use(express.session({secret:'secret'}));
         require(path.join(__dirname, './lib/security'))(app);

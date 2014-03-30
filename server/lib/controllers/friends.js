@@ -6,7 +6,7 @@ var ftd = require('../../../lib/findthedude.js');
 * Update user friend list
 */
 exports.update = function (request, response) {
-   var userId = request.params.userId;
+   var userId = request.user.facebookId;
 
    console.log('Updating friend list.');
    ftd.prepare(userId, function (err) {
