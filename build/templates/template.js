@@ -25,23 +25,18 @@ angular.module('youlearn').run(['$templateCache', function($templateCache) {
     "<div class=\"navbar navbar-inverse navbar-fixed-top\" role=\"navigation\">\n" +
     "    <div class=\"container\">\n" +
     "        <div class=\"navbar-header\">\n" +
-    "            <button type=\"button\" class=\"navbar-toggle\">\n" +
+    "            <button type=\"button\" class=\"navbar-toggle\" data-ng-click=\"collapsed = !collapsed\">\n" +
     "                <span class=\"icon-bar\"></span>\n" +
     "                <span class=\"icon-bar\"></span>\n" +
     "                <span class=\"icon-bar\"></span>\n" +
     "            </button>\n" +
     "            <a class=\"navbar-brand\" href=\"#\">Find this Dude</a>\n" +
     "        </div>\n" +
-    "        <div class=\"collapse navbar-collapse\">\n" +
+    "        <div class=\"collapse navbar-collapse\" data-collapse=\"collapsed\">\n" +
     "            <ul class=\"nav navbar-nav\">\n" +
     "                <li data-ng-class=\"{'active': isActive('/dudes')}\">\n" +
     "                    <a href=\"/dudes\">\n" +
-    "                        <i class=\"fa fa-home\"></i> Dudes!\n" +
-    "                    </a>\n" +
-    "                </li>\n" +
-    "                <li>\n" +
-    "                    <a href=\"/find\" data-ng-class=\"{'active': isActive('/find')}\">\n" +
-    "                        <i class=\"fa fa-users\"></i> Find them!\n" +
+    "                        <i class=\"fa fa-home\"></i> Home!\n" +
     "                    </a>\n" +
     "                </li>\n" +
     "            </ul>\n" +

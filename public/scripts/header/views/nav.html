@@ -1,23 +1,18 @@
 <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
     <div class="container">
         <div class="navbar-header">
-            <button type="button" class="navbar-toggle">
+            <button type="button" class="navbar-toggle" data-ng-click="collapsed = !collapsed">
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
             <a class="navbar-brand" href="#">Find this Dude</a>
         </div>
-        <div class="collapse navbar-collapse">
+        <div class="collapse navbar-collapse" data-collapse="collapsed">
             <ul class="nav navbar-nav">
                 <li data-ng-class="{'active': isActive('/dudes')}">
                     <a href="/dudes">
-                        <i class="fa fa-home"></i> Dudes!
-                    </a>
-                </li>
-                <li>
-                    <a href="/find" data-ng-class="{'active': isActive('/find')}">
-                        <i class="fa fa-users"></i> Find them!
+                        <i class="fa fa-home"></i> Home!
                     </a>
                 </li>
             </ul>
