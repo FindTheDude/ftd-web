@@ -24,13 +24,27 @@
             var expire = match[2];
             facebook.me(token, function(response) {
                 console.log(response);
-                var user = new User({fullName: response.name, facebookId: response.id, accessToken: token, expires: expire});
-                user.save(function(err) {
-                    if(err) {
-                        done(null, false, {message: 'Cannot persist user'});
-                    }
-                });
-                done(null, user);
+                console.log('Here we would find the user... by '+ response.id);
+                User.findOne({ facebookId : response.id},
+                          function(error, user) {
+                                if (error) {
+                                    done(null, false, {message: 'Cannot persist user'});
+                                }
+                                if (!user) {
+                                        user = new User({fullName: response.name, facebookId: response.id, accessToken: token, expires: expire});
+                                        user.save(function(err) {
+                                            if(err) {
+                                                done(null, false, {message: 'Cannot persist user'});
+                                            }
+                                        });
+                                        done(null, user);
+                                        console.log('We would create the user');
+                                }
+                                else {
+                                    console.log('We have found the user!');
+                                    done(null, user);
+                                }
+                        });
             });
         });
     }));
