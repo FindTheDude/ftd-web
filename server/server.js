@@ -14,37 +14,35 @@
     //     // yay!
     // });
 
+    var User = require('../models/schema.js');
+
     app.get('/user/get', function(req, res){
-      res.send('Here is the user');
+      var user = new User({ fullname: 'Andres', facebookId: 'thisismyfacebookid', accessToken: 'what_a_token!'});
+      res.send('Here is the user: '+ user);
     });
 
     app.get('/user/add', function(req, res){
       res.send('Creating the User');
     });
 
-    var configuration = require('./configuration');
-
     console.log(__dirname);
     //this is needed only on dev environment
     //also avoid hard coding the value
     app.use(require('connect-livereload')({
-        port: configuration.get('livereload:port')
+        port: 35729
     }));
-    app.use(express.bodyParser({uploadDir: config.get('upload:dir')}));
+
+    app.use(express.bodyParser({uploadDir:'/tmp/'}));
 
     app.use(express.static(path.join(__dirname, '../build')));
     app.use(express.static(path.join(__dirname, '../public')));
     app.use(express.errorHandler());
-    app.use(logging);
 
-    app.use(express.static(path.join(__dirname, '../build')));
-    app.use(express.static(path.join(__dirname, '../public')));
-    app.use(express.errorHandler());
-    app.use(logging);
+    // Routing
     require('../lib/routes')(app);
 
-    app.listen(configuration.get('express:port'), function() {
-        console.log('Express server listening on port ' + configuration.get('express:port'));
+    app.listen(process.env.PORT || 3000, function() {
+        console.log('Express server listening on port 3000');
     });
 
     module.exports = app;
