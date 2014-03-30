@@ -2,7 +2,7 @@
     'use strict';
 
     angular.module('find-the-dude')
-        .directive('upload', function () {
+        .directive('upload', function ($auth) {
             return {
                 restrict: 'A',
                 replace: false,
@@ -67,12 +67,13 @@
                                 }
                             }
                         });
+
                         if(filesToUpload.length > 0) {
                             upload(filesToUpload, url);
                         }
                     };
-
-                    var url = '/api/users/dudes';
+                    var user = $auth.user();
+                    var url = '/api/users/dudes?userId='+user.facebookId+'&accessToken='+user.accessToken;
                     scope.progress = 0;
                     scope.started = false;
 
@@ -83,7 +84,7 @@
                     var dragEnterLeave = function(event) {
                         event.stopPropagation();
                         event.preventDefault();
-                        dropbox.removeClass('drop-area-drag-over')
+                        dropbox.removeClass('drop-area-drag-over');
                     };
 
                     scope.openFileBrowser = function() {

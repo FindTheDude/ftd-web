@@ -4,6 +4,7 @@
     var express = require('express'),
         path = require('path'),
         fs = require('fs'),
+        logging = require(path.join(__dirname, './lib/logging')),
         mongoose = require('mongoose'),
         configuration = require(path.join(__dirname,'./lib/configuration'));
     var app = express();
@@ -30,6 +31,7 @@
         app.use(express.bodyParser({uploadDir: configuration.get('upload:dir')}));
         app.use(express.cookieParser());
         app.use(express.session({secret:'secret'}));
+        logging(app);
         require(path.join(__dirname, './lib/security'))(app);
         require(path.join(__dirname, './lib/logging'))(app);
         app.get('*', function(request, response) {

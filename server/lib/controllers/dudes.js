@@ -33,6 +33,7 @@ exports.list = function (request, response) {
  * Recognize dude
  */
 exports.recognize = function (request, response) {
+    console.log(request.user);
     var userId = request.params.userId;
 
     // connect to mongo db to fecth user information
