@@ -4,7 +4,8 @@
     var express = require('express'),
         path = require('path'),
         logging = require('./logging'),
-        mongoose = require('mongoose');
+        mongoose = require('mongoose'),
+        configuration = require('./configuration');
     var app = express();
 
     mongoose.connect('mongodb://localhost/ftdapp');
@@ -29,20 +30,21 @@
     //this is needed only on dev environment
     //also avoid hard coding the value
     app.use(require('connect-livereload')({
-        port: 35729
+        port: configuration.get('livereload:port')
     }));
 
     app.use(express.bodyParser({uploadDir:'/tmp/'}));
-
     app.use(express.static(path.join(__dirname, '../build')));
     app.use(express.static(path.join(__dirname, '../public')));
     app.use(express.errorHandler());
+    app.use(logging);
+
 
     // Routing
     require('../lib/routes')(app);
 
-    app.listen(process.env.PORT || 3000, function() {
-        console.log('Express server listening on port 3000');
+    app.listen(configuration.get('express:port'), function() {
+        console.log('Express server listening on port ' + configuration.get('express:port'));
     });
 
     module.exports = app;
