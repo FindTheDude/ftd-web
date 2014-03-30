@@ -15,7 +15,7 @@
     //     // yay!
     // });
 
-    var schema = require('models/schema.js');
+    var User = require('../models/schema.js');
 
     app.get('/user/get', function(req, res){
       var user = new User({ fullname: 'Andres', facebookId: 'thisismyfacebookid', accessToken: 'what_a_token!'});

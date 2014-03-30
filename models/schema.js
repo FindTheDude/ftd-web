@@ -1,6 +1,6 @@
 // File that defines our User Model
+var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
-
 var userSchema = new Schema({
   fullName:  String,
   facebookId: String,
@@ -9,3 +9,4 @@ var userSchema = new Schema({
 
 
 var User = mongoose.model('User', userSchema);
+module.export = User
