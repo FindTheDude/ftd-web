@@ -10,14 +10,21 @@ angular.module('youlearn').run(['$templateCache', function($templateCache) {
     "        <div class=\"col-sm-8\">\n" +
     "            <h1>{{user.fullName}}</h1>\n" +
     "            <button class=\"btn btn-lg btn-primary\">\n" +
-    "                <i class=\"fa fa-users\"></i> Find a dude!\n" +
-    "            </button>\n" +
-    "            <button class=\"btn btn-lg btn-primary\">\n" +
     "                <i class=\"fa fa-refresh\"></i> Refresh Contacts\n" +
     "            </button>\n" +
     "        </div>\n" +
     "    </div>\n" +
-    "</div>"
+    "</div>\n" +
+    "\n" +
+    "<div class=\"jumbotron drop_into_well\">\n" +
+    "    <h2>Find This Dude <br/><small>Drag and drop an image into this space to try and identify the dudes in it.</small></h2>\n" +
+    "</div>\n" +
+    "\n"
+  );
+
+
+  $templateCache.put('scripts/dudes/views/search.html',
+    ""
   );
 
 

@@ -5785,6 +5785,7 @@ body {
   background-color: #ececec;
   border-width: 5px;
   border-style: dashed;
+  text-align: center;
   cursor: pointer;
 }
 .drop_into_well:hover {

@@ -39,7 +39,6 @@ exports.recognize = function (request, response) {
 
    var filePath = request.files.file.path;
 
-
    console.log('Ready to predict.');
 
    async.waterfall([
