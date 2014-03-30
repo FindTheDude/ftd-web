@@ -15,6 +15,8 @@
                     scope.logout = function() {
                         $auth.logout();
                     };
+
+                    scope.collapsed = true;
                 }
             };
         });
