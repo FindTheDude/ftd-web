@@ -7,6 +7,5 @@ var userSchema = new Schema({
   accessToken: String
 });
 
-
 var User = mongoose.model('User', userSchema);
-module.export = User
+module.export = User;
