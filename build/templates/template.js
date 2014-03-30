@@ -21,6 +21,11 @@ angular.module('youlearn').run(['$templateCache', function($templateCache) {
   );
 
 
+  $templateCache.put('scripts/dudes/views/search.html',
+    ""
+  );
+
+
   $templateCache.put('scripts/header/views/nav.html',
     "<div class=\"navbar navbar-inverse navbar-fixed-top\" role=\"navigation\">\n" +
     "    <div class=\"container\">\n" +

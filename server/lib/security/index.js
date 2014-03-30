@@ -39,7 +39,7 @@
                             done(null, user);
                         } else {
                             user.accessToken = token;
-                            user.expires = new Date().setTime(new Date().getTime() + expire*1000);
+                            user.expires = new Date().setTime(new Date().getTime() + expire * 1000);
                             user.save();
                             done(null, user);
                         }
