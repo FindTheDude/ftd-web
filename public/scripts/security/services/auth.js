@@ -15,7 +15,7 @@
             var finish = function(response) {
                 console.log(response);
                 ipCookie('user', response.data,
-                    {expires: response.data.expires.getMinutes() - new Date().getMinutes(), expirationUnit: 'minutes'});
+                    {expires: (response.data.expires.getTime() - new Date().getTime())/60000, expirationUnit: 'minutes'});
                 $rootScope.user = ipCookie('user');
                 $location.path('/dudes');
             };

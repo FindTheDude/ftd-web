@@ -29,8 +29,7 @@
                             done(null, false, {message: 'Cannot authenticate user'});
                         }
                         if (!user) {
-                            var expiration = new Date();
-                            expiration.setMinutes(expiration.getMinutes() + expire/60);
+                            var expiration = new Date().setTime(new Date().getTime() + expire);
                             user = new User({fullName: response.name, facebookId: response.id, accessToken: token, expires: expiration});
                             user.save(function (err) {
                                 if (err) {
@@ -40,8 +39,7 @@
                             done(null, user);
                         } else {
                             user.accessToken = token;
-                            user.expires = new Date();
-                            user.expires.setMinutes(user.expires.getMinutes() + expire/60);
+                            user.expires = new Date().setTime(new Date().getTime() + expire*1000);
                             user.save();
                             done(null, user);
                         }
