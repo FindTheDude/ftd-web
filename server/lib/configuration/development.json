@@ -11,7 +11,7 @@
         "client_secret": "cc698dd6bd6fff0c1dc21516ad995c53"
     },
     "mongo": {
-        "uri": "localhost"
+        "uri": "mongodb://localhost/ftdapp"
     },
     "upload": {
         "dir" : "/tmp"

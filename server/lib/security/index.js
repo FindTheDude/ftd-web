@@ -10,12 +10,16 @@
         usernameField: 'userId',
         passwordField: 'accessToken'
     }, function(userId, accessToken, done) {
-        if(!userId && !acccessToken) {
+        if(!userId && !accessToken) {
             done(null, false, {message: 'Invalid userId or token'});
         }
 
         console.log('access_token ' + accessToken);
 
-        facebook.retrieve
+        facebook.retrieveLongLiveToken(accessToken, function() {
+
+        });
+
+//        var user = new User({ fullname: 'Andres', facebookId: 'thisismyfacebookid', accessToken: 'what_a_token!'});
     }));
 })();
