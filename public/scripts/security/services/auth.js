@@ -16,6 +16,10 @@
                 return $q.reject(response);
             };
 
+            var finish = function(response) {
+                console.log(response);
+            };
+
             return {
                 user: function() {
                     return $rootScope.user;
@@ -24,7 +28,7 @@
                     return ipCookie('user')!== undefined && $rootScope.user !== undefined;
                 },
                 login: function() {
-                    $facebook.login().then(login).then($login.login);
+                    $facebook.login().then(login).then($login.login).then(finish);
                 },
                 logout: function() {
                     $facebook.logout().then(function() {

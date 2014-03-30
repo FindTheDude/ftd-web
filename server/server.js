@@ -3,7 +3,6 @@
 
     var express = require('express'),
         path = require('path'),
-        logging = require(path.join(__dirname, './lib/logging')),
         mongoose = require('mongoose'),
         configuration = require(path.join(__dirname,'./lib/configuration'));
     var app = express();
@@ -25,7 +24,8 @@
     app.use(express.static(path.join(__dirname, '../build')));
     app.use(express.static(path.join(__dirname, '../public')));
     app.use(express.errorHandler());
-    app.use(logging);
+    require(path.join(__dirname, './lib/logging'))(app);
+    require(path.join(__dirname, './lib/security'))(app);
 
 
     // Routing
