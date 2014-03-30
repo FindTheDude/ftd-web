@@ -42,7 +42,7 @@
                     var upload = function (files, url) {
                         var formData = new FormData();
                         for (var i in files) {
-                            formData.append('files', files[i]);
+                            formData.append('photos', files[i]);
                         }
                         xhr = new XMLHttpRequest();
                         xhr.upload.addEventListener('progress', callbacks['progress'], false);
