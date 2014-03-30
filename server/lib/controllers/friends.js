@@ -1,6 +1,6 @@
 'use strict';
 
-var ftd = require('../findthedude.js');
+var ftd = require('../../../lib/findthedude.js');
 
 /**
 * Update user friend list

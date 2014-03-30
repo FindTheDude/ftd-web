@@ -1,8 +1,8 @@
 'use strict';
 
-var async = require('sync'),
-   fs = require('fs'),
-   ftd = require('../findthedude.js');
+var async = require('async'),
+    fs    = require('fs'),
+    ftd   = require('../../../lib/findthedude.js');
 
 /**
 * Get a specific dude

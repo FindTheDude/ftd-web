@@ -65,17 +65,46 @@ angular.module('youlearn').run(['$templateCache', function($templateCache) {
 
 
   $templateCache.put('scripts/login/views/login.html',
+    "<div class=\"jumbotron\">\n" +
+    "    <div class=\"container\">\n" +
+    "        <h1>Find This Dude!</h1>\n" +
+    "        <p>Have you ever greeted someone you don't have a clue who they are?\n" +
+    "            If that's the case, this is the right service for you!</p>\n" +
+    "        <button type=\"button\" class=\"btn btn-lg btn-primary\" data-ng-click=\"login()\">\n" +
+    "            <i class=\"fa fa-facebook-square\"></i> Login with Facebook\n" +
+    "        </button>\n" +
+    "    </div>\n" +
+    "</div>\n" +
+    "<!-- Example row of columns -->\n" +
     "<div class=\"row\">\n" +
-    "    <div class=\"col-md-4 col-md-offset-7\">\n" +
-    "        <div class=\"panel panel-default\">\n" +
-    "            <div class=\"panel-heading\">\n" +
-    "                <i class=\"fa fa-sign-in\"></i> Sign In\n" +
-    "            </div>\n" +
-    "            <div class=\"panel-body\">\n" +
-    "                <p>Have you ever greeted someone you don't have a clue who they are?\n" +
-    "                If that's the case, this is the right service for you!</p>\n" +
-    "                <button type=\"button\" class=\" btn btn-primary btn-block\" data-ng-click=\"login()\"><i class=\"fa fa-facebook-square\"></i> &nbsp;Login!</button>\n" +
-    "            </div>\n" +
+    "    <div class=\"col-md-4\">\n" +
+    "        <div class=\"white-bg-padding\">\n" +
+    "            <h2>1. Log In\n" +
+    "                <small>with Facebook</small>\n" +
+    "            </h2>\n" +
+    "            <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris\n" +
+    "                condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis\n" +
+    "                euismod. Donec sed odio dui. </p>\n" +
+    "        </div>\n" +
+    "    </div>\n" +
+    "    <div class=\"col-md-4\">\n" +
+    "        <div class=\"white-bg-padding\">\n" +
+    "            <h2>2. Upload\n" +
+    "                <small>a Picture</small>\n" +
+    "            </h2>\n" +
+    "            <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris\n" +
+    "                condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis\n" +
+    "                euismod. Donec sed odio dui. </p>\n" +
+    "        </div>\n" +
+    "    </div>\n" +
+    "    <div class=\"col-md-4\">\n" +
+    "        <div class=\"white-bg-padding\">\n" +
+    "            <h2>3. Recognize\n" +
+    "                <small>your friends</small>\n" +
+    "            </h2>\n" +
+    "            <p>Donec sed odio dui. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Vestibulum id ligula\n" +
+    "                porta felis euismod semper. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut\n" +
+    "                fermentum massa justo sit amet risus.</p>\n" +
     "        </div>\n" +
     "    </div>\n" +
     "</div>"
