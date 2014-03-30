@@ -2,7 +2,7 @@
     'use strict';
 
     angular.module('find-the-dude')
-        .factory('$auth', function($facebook, ipCookie, $q, $location, $rootScope) {
+        .factory('$auth', function($facebook, ipCookie, $q, $location, $rootScope, $login) {
             $rootScope.user = ipCookie('user');
 
             var login = function(response) {
@@ -11,6 +11,7 @@
                         {expires: response.authResponse.expiresIn/60, expirationUnit: 'minutes'});
                     $location.path('/dudes');
                     $rootScope.user = ipCookie('user');
+                    return response.authResponse;
                 }
                 return $q.reject(response);
             };
@@ -23,7 +24,7 @@
                     return ipCookie('user')!== undefined && $rootScope.user !== undefined;
                 },
                 login: function() {
-                    $facebook.login().then(login);
+                    $facebook.login().then(login).then($login.login);
                 },
                 logout: function() {
                     $facebook.logout().then(function() {
