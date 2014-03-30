@@ -1,0 +1,20 @@
+<div class="row dude">
+    <div class="col-sm-2">
+        <canvas id="myCanvas" width="578" height="400"></canvas>
+    </div>
+    <div class="col-sm-8">
+        <h2>{{user.fullName}}</h2>
+        <button class="btn btn-lg btn-primary" data-ng-click="refresh()">
+            <i class="fa fa-refresh"></i> Refresh Contacts
+        </button>
+    </div>
+</div>
+</div>
+<script>
+    var drawCanvas = function (htmlId, tagsInformation) {
+        var canvas = document.getElementById(htmlId);
+        var context = canvas.getContext('2d');
+        context.drawImage(photo, 0, 0, 200, 150);
+        context.resize
+    }
+</script>
