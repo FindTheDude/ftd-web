@@ -5781,14 +5781,17 @@ body {
 }
 /*@import (reference) url(http://fonts.googleapis.com/css?family=Vampiro+One&subset=latin,latin-ext);
 @import (reference) url(http://fonts.googleapis.com/css?family=Cabin+Condensed);*/
-.drop_into_well {
+.drop-area {
   background-color: #ececec;
   border-width: 5px;
   border-style: dashed;
   text-align: center;
   cursor: pointer;
 }
-.drop_into_well:hover {
+.drop-area:hover {
+  background-color: #d1cb9a;
+}
+.drop-area-drag-over {
   background-color: #d1cb9a;
 }
 .white-bg-padding {

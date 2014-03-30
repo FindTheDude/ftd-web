@@ -16,9 +16,7 @@ angular.module('youlearn').run(['$templateCache', function($templateCache) {
     "    </div>\n" +
     "</div>\n" +
     "\n" +
-    "<div class=\"jumbotron drop_into_well\">\n" +
-    "    <h2>Find This Dude <br/><small>Drag and drop an image into this space to try and identify the dudes in it.</small></h2>\n" +
-    "</div>\n" +
+    "<div data-upload></div>\n" +
     "\n"
   );
 
@@ -28,8 +26,21 @@ angular.module('youlearn').run(['$templateCache', function($templateCache) {
   );
 
 
-  $templateCache.put('scripts/dudes/views/search.html',
-    ""
+  $templateCache.put('scripts/dudes/views/upload.html',
+    "<div class=\"jumbotron drop-area\" data-ng-click=\"openFileBrowser()\">\n" +
+    "    <input type=\"file\" ng-show=\"false\" name=\"file\" onchange=\"angular.element(this).scope().fileChanged(this)\" multiple=\"multiple\"/>\n" +
+    "    <div data-ng-switch=\"showProgress()\">\n" +
+    "        <span data-ng-switch-when=\"false\">\n" +
+    "            <h2>Find This Dude <br/><small>Drag and drop an image into this space to try and identify the dudes in it.</small></h2>\n" +
+    "        </span>\n" +
+    "        <span data-ng-switch-default=\"true\">\n" +
+    "            <div class=\"progress progress-striped active col-lg-12\">\n" +
+    "                <div class=\"progress-bar\" data-ng-style=\"{'width': progress + '%'}\"></div>\n" +
+    "            </div>\n" +
+    "            <button type=\"button\" class=\"btn btn-primary\" data-ng-click=\"cancel()\">Cancel</button>\n" +
+    "        </span>\n" +
+    "    </div>\n" +
+    "</div>"
   );
 
 

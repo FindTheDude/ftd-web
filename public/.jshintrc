@@ -20,5 +20,6 @@
     "globals": {
         "angular": false,
         "console": false
-    }
+    },
+    "sub": true
 }

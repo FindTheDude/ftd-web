@@ -1,0 +1,14 @@
+<div class="jumbotron drop-area" data-ng-click="openFileBrowser()">
+    <input type="file" ng-show="false" name="file" onchange="angular.element(this).scope().fileChanged(this)" multiple="multiple"/>
+    <div data-ng-switch="showProgress()">
+        <span data-ng-switch-when="false">
+            <h2>Find This Dude <br/><small>Drag and drop an image into this space to try and identify the dudes in it.</small></h2>
+        </span>
+        <span data-ng-switch-default="true">
+            <div class="progress progress-striped active col-lg-12">
+                <div class="progress-bar" data-ng-style="{'width': progress + '%'}"></div>
+            </div>
+            <button type="button" class="btn btn-primary" data-ng-click="cancel()">Cancel</button>
+        </span>
+    </div>
+</div>

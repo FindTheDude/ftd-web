@@ -2,19 +2,21 @@
 //
 //##
 
-@well-bg:                     #ececec;
-@well-border:                 darken(@well-bg, 7%);
+@well-bg: #ececec;
+@well-border: darken(@well-bg, 7%);
 
+.drop-area {
+  background-color: @well-bg;
+  border-width: 5px;
+  border-style: dashed;
+  text-align: center;
 
-.drop_into_well {
-	background-color: @well-bg;
-	border-width:5px;	
-	border-style:dashed;	
-    text-align: center;
+  cursor: pointer;
+  &:hover {
+    background-color: #d1cb9a;
+  }
+}
 
-	cursor:pointer;
-
-	&:hover {
-		background-color: #d1cb9a;
-	}
+.drop-area-drag-over {
+  background-color: #d1cb9a;
 }
