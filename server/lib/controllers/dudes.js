@@ -69,69 +69,69 @@ exports.recognize = function (request, response) {
 
     var userId = request.user.facebookId;
 
-    var filePath = request.files.photo.path;
+    async.each(request.files, function (err, file) {
+        var filePath = file.path;
+        var photoFd;
 
-    console.log('Ready to predict.');
+        console.log('Ready to predict one photo.');
 
-    var photo;
+        async.waterfall([
+            function (callback) {
+                console.log('Checking if ready.');
 
-    async.waterfall([
-        function (callback) {
-            console.log('Checking if ready.');
-
-            ftd.ready(userId, function (err, isReady) {
-                if (!isReady) {
-                    err = 'Not Ready';
-                }
-                callback(err);
-            });
-        },
-        function (callback) {
-            console.log('Getting stats.');
-
-            fs.stat(filePath, function (err, stats) {
-                callback(err, stats);
-            });
-        },
-        function (stats, callback) {
-            console.log('Getting file.');
-
-            if (!stats.isFile) {
-                var err = 'Not a file.';
-                callback(err);
-            } else {
-                fs.open(filePath, 'r', function (err, fileDescriptor) {
-                    photo = fileDescriptor;
-                    callback(err, fileDescriptor);
+                ftd.ready(userId, function (err, isReady) {
+                    if (!isReady) {
+                        err = 'Not Ready';
+                    }
+                    callback(err);
                 });
+            },
+            function (callback) {
+                console.log('Getting stats.');
+
+                fs.stat(filePath, function (err, stats) {
+                    callback(err, stats);
+                });
+            },
+            function (stats, callback) {
+                console.log('Getting file.');
+
+                if (!stats.isFile) {
+                    var err = 'Not a file.';
+                    callback(err);
+                } else {
+                    fs.open(filePath, 'r', function (err, fileDescriptor) {
+                        photoFd = fileDescriptor;
+                        callback(err, fileDescriptor);
+                    });
+                }
+            },
+            function (fileDescriptor, callback) {
+                console.log('predicting.');
+                ftd.predict(userId, fileDescriptor, function (err, predictions) {
+                    callback(err, predictions);
+                });
+            },
+            function (tagArray) {
+                console.log('Predicted.');
+
+                var tagsEntity = new Tags({
+                    facebookId: request.user.facebookId,
+                    photo: photoFd,
+                    tags: tagArray
+                });
+
+                tagsEntity.save();
+
+                return response.json({tags: tagArray});
             }
-        },
-        function (fileDescriptor, callback) {
-            console.log('predicting.');
-            ftd.predict(userId, fileDescriptor, function (err, predictions) {
-                callback(err, predictions);
+        ], function (err) {
+            var errors = [];
+            errors.push({
+                statusCode: 404,
+                error: err
             });
-        },
-        function (tagArray) {
-            console.log('Predicted.');
-
-            var tagsEntity = new Tags({
-                facebookId: request.user.facebookId,
-                photo: photo,
-                tags: tagArray
-            });
-
-            tagsEntity.save();
-
-            // Todo store to mongo db to allow refetching of dudes
-            return response.json({tags: tagArray});
-        }
-    ], function (err) {
-        var errors = [];
-        errors.push({
-            statusCode: 404,
-            error: err
+            response.send(404, err);
         });
-        response.send(404, err);
     });
 };

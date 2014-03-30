@@ -71,7 +71,7 @@
             res.send(req.user);
         });
 
-        app.get('/logout', function(req, res) {
+        app.get('/logout', function(req) {
             req.logout();
         });
     };
