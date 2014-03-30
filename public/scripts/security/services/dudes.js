@@ -6,7 +6,7 @@
             return {
                 refresh: function() {
                     console.log('Refreshing contacts.');
-                    return $http({method: 'POST', url: '/friends'});
+                    return $http({method: 'POST', url: '/api/users/friends'});
                 }
             };
         });
