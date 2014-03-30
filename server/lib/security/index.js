@@ -18,22 +18,21 @@
         User.findOne({facebookId: userId}, function(error, user) {
             if(user) {
                 if(user.expires.getTime() < new Date().getTime()) {
-                    console.log('WTF');
                     facebook.retrieveLongLiveToken(accessToken, function(data) {
                         var regexp = /^access_token=([^&]+)&expires=([^&]+).*$/;
                         var match = regexp.exec(data);
                         var token = match[1];
                         var expire = match[2];
                         user.accessToken = token;
-                        user.expires = new Date().setTime(new Date().getTime() + expire * 1000);
+                        user.expires = new Date().setTime(new Date().getTime() + parseInt(expire) * 1000);
+                        user.save(function(error) {
+                            if(error) {
+                                done(null, false, {message: 'Cannot update user'});
+                            }
+                            done(null, user);
+                        });
                     });
                 }
-                user.save(function(error) {
-                    if(error) {
-                        done(null, false, {message: 'Cannot update user'});
-                    }
-                    done(null, user);
-                });
             } else {
                 facebook.retrieveLongLiveToken(accessToken, function(data) {
                     var regexp = /^access_token=([^&]+)&expires=([^&]+).*$/;
@@ -41,14 +40,14 @@
                     var token = match[1];
                     var expire = match[2];
                     facebook.me(token, function(response) {
-                        var expiration = new Date().setTime(new Date().getTime() + expire);
+                        var expiration = new Date().setTime(new Date().getTime() + parseInt(expire) * 1000);
                         var user = new User({fullName: response.name, facebookId: response.id, accessToken: token, expires: expiration});
                         user.save(function(error) {
                             if(error) {
                                 done(null, false, {message: 'Cannot persist user'});
                             }
+                            done(null, user);
                         });
-                        done(null, user);
                     });
                 });
             }
@@ -68,7 +67,12 @@
         app.use(passport.session());
 
         app.post('/api/auth/facebook', passport.authenticate('local'), function (req, res) {
+            res.status(200);
             res.send(req.user);
+        });
+
+        app.get('/logout', function(req, res) {
+            req.logout();
         });
     };
 })();
