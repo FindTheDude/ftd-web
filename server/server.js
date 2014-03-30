@@ -3,14 +3,18 @@
 
     var express = require('express'),
         path = require('path'),
+        fs = require('fs'),
         mongoose = require('mongoose'),
         configuration = require(path.join(__dirname,'./lib/configuration'));
     var app = express();
 
     mongoose.connect('mongodb://localhost/ftdapp');
 
-    app.get('/user/add', function(req, res){
-      res.send('Creating the User');
+    var modelsPath = path.join(__dirname, './lib/models');
+    fs.readdirSync(modelsPath).forEach(function (file) {
+        if (/(.*)\.(js$|coffee$)/.test(file)) {
+            require(modelsPath + '/' + file);
+        }
     });
 
     console.log(__dirname);
@@ -20,13 +24,19 @@
         port: configuration.get('livereload:port')
     }));
 
-    app.use(express.bodyParser({uploadDir:'/tmp/'}));
-    app.use(express.static(path.join(__dirname, '../build')));
-    app.use(express.static(path.join(__dirname, '../public')));
-    app.use(express.errorHandler());
-    require(path.join(__dirname, './lib/logging'))(app);
-    require(path.join(__dirname, './lib/security'))(app);
-
+    app.configure(function() {
+        app.use(express.static(path.join(__dirname, '../build')));
+        app.use(express.static(path.join(__dirname, '../public')));
+        app.use(express.bodyParser({uploadDir: configuration.get('upload:dir')}));
+        app.use(express.cookieParser());
+        app.use(express.session({secret:'secret'}));
+        require(path.join(__dirname, './lib/security'))(app);
+        require(path.join(__dirname, './lib/logging'))(app);
+        app.get('*', function(request, response) {
+            response.sendfile(path.join(__dirname, '../public/index.html'));
+        });
+        //here goes router
+    });
 
     // Routing
     require('./routes')(app);

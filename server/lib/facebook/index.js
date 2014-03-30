@@ -41,7 +41,7 @@
 
         var options = {
             query: {
-                'fb_exchange_token': accessToken,
+                'access_token': accessToken,
                 'fields': 'id,name'
             }
         };

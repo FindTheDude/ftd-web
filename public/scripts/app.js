@@ -37,7 +37,7 @@
         })
         .run(function ($rootScope, $auth, $location) {
             $rootScope.$on('$routeChangeStart', function (event, next) {
-                if(next.redirectTo !== '/login' && !$auth.isLoggedIn()) {
+                if(next.restricted && !$auth.isLoggedIn()) {
                     $location.path('/login');
                 }
             });

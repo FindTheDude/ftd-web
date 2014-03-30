@@ -7,7 +7,8 @@
     var UserSchema = new Schema({
         fullName: String,
         facebookId: String,
-        accessToken: String
+        accessToken: String,
+        expires: Date
     });
 
     module.export = mongoose.model('User', UserSchema);

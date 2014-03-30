@@ -7,10 +7,6 @@
 
             var login = function(response) {
                 if(response.status === 'connected') {
-                    ipCookie('user', {fullName: 'Angel L. Villalain', 'userName': 'angel.villalain', picture: 'https://fbcdn-profile-a.akamaihd.net/hprofile-ak-frc3/t1.0-1/c38.8.103.103/1779207_10100311295035269_252880975_a.jpg'},
-                        {expires: response.authResponse.expiresIn/60, expirationUnit: 'minutes'});
-                    $location.path('/dudes');
-                    $rootScope.user = ipCookie('user');
                     return response.authResponse;
                 }
                 return $q.reject(response);
@@ -18,6 +14,10 @@
 
             var finish = function(response) {
                 console.log(response);
+                ipCookie('user', response.data,
+                    {expires: (response.data.expires.getTime() - new Date().getTime())/60000, expirationUnit: 'minutes'});
+                $rootScope.user = ipCookie('user');
+                $location.path('/dudes');
             };
 
             return {
