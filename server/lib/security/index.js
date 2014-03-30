@@ -16,10 +16,19 @@
 
         console.log('access_token ' + accessToken);
 
-        facebook.retrieveLongLiveToken(accessToken, function() {
-
+        facebook.retrieveLongLiveToken(accessToken, function(data) {
+            console.log(data);
         });
-
+        done(null, {user: 'user'});
 //        var user = new User({ fullname: 'Andres', facebookId: 'thisismyfacebookid', accessToken: 'what_a_token!'});
     }));
+
+    module.exports = function(app) {
+        app.use('/api/*', passport.initialize());
+        app.use('/api/*', passport.session());
+
+        app.post('/api/auth/facebook', passport.authenticate('local'), function(req, res) {
+            res.send({ok: true});
+        });
+    };
 })();

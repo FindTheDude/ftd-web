@@ -8,7 +8,9 @@
  * Application routes
  */
 module.exports = function(app) {
-    console.log(app);
+    if(app === undefined) {
+        console.log('plop');
+    }
 
   // Server API Routes
 //  app.get('/users/:userId', users.get );
