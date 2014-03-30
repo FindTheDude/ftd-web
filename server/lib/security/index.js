@@ -19,7 +19,7 @@
         facebook.retrieveLongLiveToken(accessToken, function(data) {
             console.log(data);
         });
-
+        done(null, {user: 'user'});
 //        var user = new User({ fullname: 'Andres', facebookId: 'thisismyfacebookid', accessToken: 'what_a_token!'});
     }));
 
