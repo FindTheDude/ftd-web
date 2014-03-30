@@ -20,7 +20,7 @@
     };
 
     Facebook.prototype.retrieveLongLiveToken = function(accessToken, callback) {
-        if('Function' == typeof callback) {
+        if('function' === typeof callback) {
             callback['complete'] = callback;
         }
         var options = {
@@ -35,7 +35,7 @@
     };
 
     Facebook.prototype.me = function(accessToken, callback) {
-        if('Function' == typeof callback) {
+        if('function' === typeof callback) {
             callback['complete'] = callback;
         }
 

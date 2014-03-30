@@ -5,7 +5,7 @@
 
     var nconf = require('nconf');
 
-    var Conf = function () {
+    var Configuration = function () {
         nconf.argv().env('_');
 
         console.log(__dirname);
@@ -15,7 +15,9 @@
         nconf.file('default', path.join('./development.json'));
     };
 
-    Conf.prototype.get = function(key) {
+    Configuration.prototype.get = function(key) {
         return nconf.get(key);
     };
+
+    module.exports = new Configuration();
 })();

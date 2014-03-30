@@ -20,5 +20,6 @@
     "browser" : true,
     "globals": {
         "angular": false
-    }
+    },
+    "sub": true
 }
