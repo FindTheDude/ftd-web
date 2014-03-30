@@ -15,8 +15,11 @@
     //     // yay!
     // });
 
+    var schema = require("models/schema.js")
+
     app.get('/user/get', function(req, res){
-      res.send('Here is the user');
+      var user = new User({ fullname: 'Andres', facebookId: 'thisismyfacebookid', accessToken: 'what_a_token!'});
+      res.send('Here is the user: '+ user);
     });
 
     app.get('/user/add', function(req, res){
