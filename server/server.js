@@ -2,12 +2,11 @@
     'use strict';
 
     var express = require('express'),
-        path    = require('path');
-
+        path = require('path'),
+        logging = require('./logging'),
+        mongoose = require('mongoose');
     var app = express();
 
-    // DB Connection
-    var mongoose = require('mongoose');
     mongoose.connect('mongodb://localhost/ftdapp');
     // var db = mongoose.createConnection('localhost', 'FTDApp');
     // db.on('error', console.error.bind(console, 'connection error:'));

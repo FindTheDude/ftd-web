@@ -1,8 +1,8 @@
 'use strict';
 
-var dudes   = require('./controllers/dudes'),
-    friends = require('./controllers/friends'),
-    users = require('./controllers/users');
+var dudes   = require('./lib/controllers/dudes'),
+    friends = require('./lib/controllers/friends'),
+    users = require('./lib/controllers/users');
 
 /**
  * Application routes

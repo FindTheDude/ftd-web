@@ -35,9 +35,20 @@
         font-weight: bold;
       }
     }
-    > .active, li {
-      border-bottom: 4px solid #fff;
+    > li {
       margin-right: 8px;
+      > a {
+        &,
+        &:hover,
+        &:focus {
+          color: @navbar-default-link-color;
+          font-weight: bold;
+          background: @navbar-translucent-background-color;
+        }
+      }
+    }
+    > li.active {
+      border-bottom: 4px solid #fff;
       > a {
         &,
         &:hover,

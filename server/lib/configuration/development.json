@@ -1,0 +1,19 @@
+{
+    "morgan": "dev",
+    "livereload" : {
+        "port": 35729
+    },
+    "express": {
+        "port": 3000
+    },
+    "facebook": {
+        "client_id": "595544040538871",
+        "client_secret": "cc698dd6bd6fff0c1dc21516ad995c53"
+    },
+    "mongo": {
+        "uri": "localhost"
+    },
+    "upload": {
+        "dir" : "/tmp"
+    }
+}

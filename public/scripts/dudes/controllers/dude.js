@@ -2,8 +2,8 @@
     'use strict';
 
     angular.module('find-the-dude')
-        .controller('DudeController', function($scope) {
-            $scope.dude = 'dude!!!';
+        .controller('DudeController', function($scope, $auth) {
+            $scope.user = $auth.user();
         })
         .config(function($routeProvider) {
             $routeProvider.when('/dudes', {
