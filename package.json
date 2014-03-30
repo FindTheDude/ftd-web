@@ -40,6 +40,11 @@
     "passport-local": "~1.0.0",
     "restler": "~3.2.0",
     "fbgraph": "~0.2.10",
-    "async": "~0.4.0"
+    "async": "~0.4.0",
+    "crypto": "0.0.3",
+    "mkdirp": "~0.3.5",
+    "request": "~2.34.0",
+    "opencv": "~0.5.0",
+    "glob": "^3.2.9"
   }
 }
