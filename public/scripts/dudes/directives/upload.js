@@ -2,7 +2,7 @@
     'use strict';
 
     angular.module('find-the-dude')
-        .directive('upload', function ($auth) {
+        .directive('upload', function () {
             return {
                 restrict: 'A',
                 replace: false,
@@ -14,6 +14,7 @@
                     var callbacks = {
                         load: function (event) {
                             if (event.target.status !== 200) {
+                                console.log(event);
                                 scope.$apply(function () {
                                     scope.started = false;
                                     scope.progress = 0;
@@ -42,7 +43,7 @@
                     var upload = function (files, url) {
                         var formData = new FormData();
                         for (var i in files) {
-                            formData.append('photos', files[i]);
+                            formData.append('photo', files[i]);
                         }
                         xhr = new XMLHttpRequest();
                         xhr.upload.addEventListener('progress', callbacks['progress'], false);
@@ -72,8 +73,7 @@
                             upload(filesToUpload, url);
                         }
                     };
-                    var user = $auth.user();
-                    var url = '/api/users/dudes?userId='+user.facebookId+'&accessToken='+user.accessToken;
+                    var url = '/api/users/dudes';
                     scope.progress = 0;
                     scope.started = false;
 

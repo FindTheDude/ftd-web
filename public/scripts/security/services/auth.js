@@ -32,6 +32,7 @@
                 },
                 logout: function() {
                     $facebook.logout().then(function() {
+                        ipCookie.remove('user');
                         $rootScope.user = undefined;
                         $location.path('/');
                     });

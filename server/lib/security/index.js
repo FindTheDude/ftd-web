@@ -32,6 +32,8 @@
                             done(null, user);
                         });
                     });
+                } else {
+                    done(null, user);
                 }
             } else {
                 facebook.retrieveLongLiveToken(accessToken, function(data) {
@@ -62,7 +64,7 @@
         done(null, User.findOne({facebookId: id}));
     });
 
-    module.exports = function (app) {
+    exports.setup = function (app) {
         app.use(passport.initialize());
         app.use(passport.session());
 
@@ -73,6 +75,16 @@
 
         app.get('/logout', function(req, res) {
             req.logout();
+            res.redirect('/');
         });
+    };
+
+    exports.isAuthenticated = function(req, res, next) {
+        if(req.isAuthenticated()) {
+            next();
+        } else {
+            res.status(401);
+            res.send();
+        }
     };
 })();

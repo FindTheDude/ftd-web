@@ -64,7 +64,7 @@ exports.recognize = function (request, response) {
 
         var dudeInformation = {tags: tagsArray };
 
-        return response.json(dudeInformation);
+        response.json(dudeInformation);
     }
 
     var userId = request.user.facebookId;

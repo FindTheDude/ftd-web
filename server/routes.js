@@ -2,7 +2,7 @@
 
 var dudes = require('./lib/controllers/dudes'),
     friends = require('./lib/controllers/friends'),
-    passport = require('passport');
+    security = require('./lib/security');
 
 /**
  * Application routes
@@ -13,8 +13,8 @@ module.exports = function (app) {
     }
 
     // Server API Routes
-    app.get('/api/users/dudes', passport.authenticate('local'), dudes.list);
-    app.post('/api/users/dudes', passport.authenticate('local'), dudes.recognize);
-    app.post('/api/users/friends', passport.authenticate('local'), friends.update);
+    app.get('/api/users/dudes', security.isAuthenticated, dudes.list);
+    app.post('/api/users/dudes', security.isAuthenticated, dudes.recognize);
+    app.post('/api/users/friends', security.isAuthenticated, friends.update);
 
 };
