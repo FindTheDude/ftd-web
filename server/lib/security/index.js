@@ -61,7 +61,12 @@
     });
 
     passport.deserializeUser(function (id, done) {
-        done(null, User.findOne({facebookId: id}));
+        User.findOne({facebookId: id}, function(err, user) {
+            if(err) {
+                done(null, false, {message: 'Cannot find user'});
+            }
+            done(null, user);
+        });
     });
 
     exports.setup = function (app) {

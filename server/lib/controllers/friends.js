@@ -10,9 +10,9 @@ var ftd = require('../../../lib/findthedude.js'),
 exports.update = function (request, response) {
     console.log('Updating friend list.');
 
-    console.log('userId: ' + request.params.userId);
+    console.log('userId: ' + request.user.facebookId);
 
-    User.find({facebookId: request.params.userId}, function (err, user) {
+    User.find({facebookId: request.user.facebookId}, function (err, user) {
         if (err) {
             console.log(err);
         }
