@@ -4,7 +4,8 @@
     var express = require('express'),
         path = require('path'),
         fs = require('fs'),
-        logging = require(path.join(__dirname, './lib/logging')),
+        security = require('./lib/express/security'),
+        logging = require(path.join(__dirname, './lib/express/logging')),
         mongoose = require('mongoose'),
         configuration = require(path.join(__dirname,'./lib/configuration'));
     var app = express();
@@ -31,17 +32,13 @@
         app.use(express.bodyParser({uploadDir: configuration.get('upload:dir'), limit: '50mb'}));
         app.use(express.cookieParser());
         app.use(express.session({secret:'secret'}));
+        security.setup(app);
         logging(app);
-        require(path.join(__dirname, './lib/security')).setup(app);
-        require(path.join(__dirname, './lib/logging'))(app);
         app.get('*', function(request, response) {
             response.sendfile(path.join(__dirname, '../public/index.html'));
         });
-        //here goes router
+        require('./routes')(app);
     });
-
-    // Routing
-    require('./routes')(app);
 
     app.listen(configuration.get('express:port'), function() {
         console.log('Express server listening on port ' + configuration.get('express:port'));

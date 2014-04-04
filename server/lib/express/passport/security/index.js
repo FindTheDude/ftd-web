@@ -6,7 +6,7 @@
     var mongoose = require('mongoose'),
         User = mongoose.model('User');
 
-    var facebook = require('../facebook');
+    var facebook = require('../../facebook');
     passport.use(new LocalStrategy({
         usernameField: 'userId',
         passwordField: 'accessToken'
